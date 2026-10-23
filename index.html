@@ -648,7 +648,8 @@ form.msg{display:flex;flex-direction:column;gap:12px}
 .field label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .field input,.field textarea{background:var(--bg-sunk);border:1px solid var(--line-2);padding:12px 14px;font-size:16px;color:var(--ink);resize:vertical}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.field input,.field textarea{min-width:0;width:100%}
 .status{font-size:14.5px;color:var(--ink-2);min-height:22px}
 footer.site{border-top:1px solid var(--line);padding-block:28px calc(28px + env(safe-area-inset-bottom,0px))}
 .foot{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;font-size:14px;color:var(--muted)}
@@ -858,6 +859,52 @@ footer.site{border-top:1px solid var(--line);padding-block:28px calc(28px + env(
   .threat .side{justify-content:flex-start}
   .term{border-right:0;border-left:2px solid rgba(255,138,61,.6);background:linear-gradient(90deg,rgba(255,138,61,.09),rgba(255,138,61,0))}
   .spark,.flash{display:none}
+}
+/* phones and narrow windows: the threat burns on the fire side, the defence stands on the ice side, a seam of light between */
+.hseam{display:none}
+@keyframes emberGlow{from{opacity:.5}to{opacity:1}}
+@media (max-width: 899px){
+  .world{background:radial-gradient(95% 55% at -12% 102%,rgba(217,72,31,.44),transparent 64%),radial-gradient(95% 55% at 112% -2%,rgba(90,169,214,.38),transparent 64%),linear-gradient(90deg,#1e0b06 0%,#140806 40%,#0a0a0d 50%,#07111c 60%,#0a1b2e 100%)}
+  .world .seam{width:1px;margin-left:0}
+  .battle{padding-block:40px}
+  .b-in{gap:0}
+  .battle .threat,.battle .defence{isolation:isolate;padding-top:24px;padding-bottom:26px;width:auto}
+  .battle .threat{margin-left:calc(-1 * var(--gut));margin-right:12px;padding-left:var(--gut);padding-right:18px;border-radius:0 18px 18px 0;
+    background:radial-gradient(85% 60% at 0% 0%,rgba(217,72,31,.26),transparent 70%),linear-gradient(90deg,rgba(44,15,8,.94),rgba(24,10,7,.9));
+    border:1px solid rgba(255,138,61,.34);border-left:0;box-shadow:0 22px 44px -26px rgba(255,96,32,.6),inset 0 1px 0 rgba(255,190,140,.14)}
+  .battle .defence{margin-right:calc(-1 * var(--gut-r));margin-left:12px;padding-right:var(--gut-r);padding-left:18px;border-radius:18px 0 0 18px;
+    background:radial-gradient(85% 60% at 100% 0%,rgba(120,200,240,.24),transparent 70%),linear-gradient(270deg,rgba(11,28,46,.94),rgba(7,15,26,.9));
+    border:1px solid rgba(143,208,240,.32);border-right:0;box-shadow:0 22px 44px -26px rgba(90,169,214,.6),inset 0 1px 0 rgba(225,246,255,.16)}
+  .battle .threat::before,.battle .defence::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1}
+  .battle .threat::before{background:radial-gradient(75% 42% at 6% 100%,rgba(255,118,38,.4),transparent 72%);animation:emberGlow 3.4s ease-in-out infinite alternate}
+  .battle .defence::before{background:repeating-linear-gradient(60deg,rgba(225,246,255,.06) 0 1px,transparent 1px 15px),repeating-linear-gradient(-60deg,rgba(225,246,255,.06) 0 1px,transparent 1px 15px);
+    -webkit-mask:radial-gradient(80% 65% at 100% 0%,#000,transparent 78%);mask:radial-gradient(80% 65% at 100% 0%,#000,transparent 78%)}
+  .battle .term{background:rgba(10,4,3,.42)}
+  .battle .bv{background:linear-gradient(90deg,rgba(159,220,255,.12),rgba(4,9,16,.35))}
+  .hseam{--p:1;--s:1;display:block;position:relative;height:2px;margin:24px 22px;border-radius:2px;background:linear-gradient(90deg,rgba(255,138,61,.24),rgba(255,236,214,.2) 50%,rgba(159,220,255,.24))}
+  .hseam::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,#ff8a3d,#ffe6cf 50%,#9fdcff);box-shadow:0 0 14px 2px rgba(255,214,180,.32);transform:scaleX(var(--p));transform-origin:0 50%}
+  .hseam b{position:absolute;top:50%;left:calc(var(--s) * 100%);width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:#fff4ea}
+  .hseam b::before,.hseam b::after{content:"";position:absolute;inset:0;border-radius:50%}
+  .hseam b::before{box-shadow:0 0 16px 6px rgba(255,138,61,.8),0 0 40px 10px rgba(255,138,61,.3);opacity:calc(1 - var(--s))}
+  .hseam b::after{box-shadow:0 0 16px 6px rgba(159,220,255,.8),0 0 40px 10px rgba(159,220,255,.3);opacity:var(--s)}
+}
+:root.still .battle .threat::before{animation:none}
+/* phones: the skill tree keeps its two sides and the lines between them */
+.node .nm-short{display:none}
+@media (max-width: 760px){
+  .tree{grid-template-columns:minmax(0,1fr) clamp(96px,27vw,180px);gap:clamp(22px,6vw,40px)}
+  #treeLines{display:block}
+  .nodes{display:flex;flex-direction:column;gap:8px;justify-content:center}
+  .node{flex-direction:column;align-items:center;text-align:center;gap:7px;padding:11px 6px}
+  .node .em{width:30px;height:30px}
+  .node .em svg{width:16px;height:16px}
+  .node b{font-size:11.5px;letter-spacing:.05em;line-height:1.25}
+  .node .nm-full,.node small{display:none}
+  .node .nm-short{display:inline}
+  .groups{gap:18px}
+  .group h3{font-size:11px;margin-bottom:8px}
+  .skills{gap:6px}
+  .skill{min-height:36px;padding:0 10px;font-size:13.5px;gap:7px}
 }
 @media (max-width: 480px){
   #quickBtn{display:none}
@@ -1416,7 +1463,7 @@ function battleLinks(p) {
 $('battles').innerHTML = P.map(function (p) {
   return '<article class="battle" id="b-' + p.id + '" aria-label="Episode ' + p.ep + ': ' + esc(p.name) + '"><div class="b-in">' +
     '<div class="threat"><p class="side">' + (p.kind === 'build' ? 'The problem' : 'The threat') + ' <em>· ' + esc(p.tag) + '</em></p><h3 class="t-title fire-t">' + esc(p.threat) + '</h3><div class="term">' + termHTML(p.term) + '</div><p class="t-note">' + esc(p.note) + '</p></div>' +
-    '<div class="defence"><p class="side">' + (p.kind === 'build' ? 'What I built' : 'The defence') + ' <em>· Episode ' + p.ep + '</em></p><h3 class="d-name ice-t">' + esc(p.name) + '</h3><p class="d-meta"><span>' + p.date + ' · ' + esc(p.team) + ' · ' + esc(p.event) + '</span>' + (p.status === 'Top 100' ? '<span class="badge">Top 100</span>' : '') + '</p>' +
+    '<i class="hseam" aria-hidden="true"><b></b></i><div class="defence"><p class="side">' + (p.kind === 'build' ? 'What I built' : 'The defence') + ' <em>· Episode ' + p.ep + '</em></p><h3 class="d-name ice-t">' + esc(p.name) + '</h3><p class="d-meta"><span>' + p.date + ' · ' + esc(p.team) + ' · ' + esc(p.event) + '</span>' + (p.status === 'Top 100' ? '<span class="badge">Top 100</span>' : '') + '</p>' +
     '<div class="bv"><b>' + esc(p.verdict[0]) + '</b><span>' + esc(p.verdict[1]) + '</span>' + (p.checks ? '<ul class="bv-checks">' + p.checks.map(function (c) { return '<li><i>' + c[0] + '</i><em>' + esc(c[1]) + '</em><strong class="' + (c[2] === 'BLOCKED' ? 'bad' : 'ok') + '">' + c[2] + '</strong></li>'; }).join('') + '</ul>' : '') + '</div><p class="d-line">' + esc(p.line) + '</p>' + '<p class="d-stack">' + esc(p.stack.join(' · ')) + '</p><div class="d-links">' + battleLinks(p) + '</div></div>' +
     '</div><i class="spark" aria-hidden="true"></i><i class="flash" aria-hidden="true"></i></article>';
 }).join('');
@@ -1456,7 +1503,7 @@ Object.keys(TC).forEach(function (k) {
   g.innerHTML = '<h3>' + esc(TC[k][0]) + '</h3><div class="skills">' + TOOLS.map(function (t, i) { return t[1] === k ? '<button type="button" class="skill" data-i="' + i + '" aria-pressed="false" style="--c:' + TC[k][1] + '"><i></i>' + esc(t[0]) + '</button>' : ''; }).join('') + '</div>';
   groupsEl.appendChild(g);
 });
-$('nodes').innerHTML = P.map(function (p) { return '<div class="node" data-p="' + p.id + '"><span class="em">' + emblem(p.id) + '</span><div><b>' + p.name + '</b><small>EP ' + p.ep + ' · ' + p.date + '</small></div></div>'; }).join('');
+$('nodes').innerHTML = P.map(function (p) { return '<div class="node" data-p="' + p.id + '"><span class="em">' + emblem(p.id) + '</span><div><b><span class="nm-full">' + p.name + '</span><span class="nm-short">' + ({ 'cti-dashboard': 'Threat Intel', 'web-scraping': 'Data Scraper' }[p.id] || p.name) + '</span></b><small>EP ' + p.ep + ' · ' + p.date + '</small></div></div>'; }).join('');
 var curTool = 0;
 function pickTool(i, pin) {
   curTool = i; var t = TOOLS[i], c = TC[t[1]][1];
@@ -1713,7 +1760,7 @@ function onScroll() {
   SECS.forEach(function (id, i) { var el = $(id); if (el.getBoundingClientRect().top < innerHeight * 0.45) { cur = id; if (!seen[id]) { seen[id] = 1; ticks[i].classList.add('seen'); } } });
   Array.prototype.forEach.call(navLinks, function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + cur); });
   var br = $('battles').getBoundingClientRect(), inB = br.top < innerHeight * 0.15 && br.bottom > innerHeight * 0.5;
-  $('world').style.setProperty('--seam', inB ? (innerWidth < 900 ? 0 : 1) : 0);
+  $('world').style.setProperty('--seam', inB ? (innerWidth < 900 ? .4 : 1) : 0);
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', function () { placeTicks(); onScroll(); });
@@ -1897,6 +1944,7 @@ if (hasGsap && motion) {
   });
   mm.add('(max-width: 899px), (max-height: 599px)', function () {
     document.querySelectorAll('.battle .threat, .battle .defence').forEach(function (el) { gsap.fromTo(el, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: .8, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%' } }); });
+    document.querySelectorAll('.battle .hseam').forEach(function (el) { gsap.fromTo(el, { '--p': 0, '--s': 0 }, { '--p': 1, '--s': 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 80%', end: 'top 45%', scrub: .5 } }); });
   });
 }
 function refreshScenes() { if (hasGsap && motion) ScrollTrigger.refresh(); }
@@ -2117,8 +2165,8 @@ var introState = { running: true, leaving: false, t0: performance.now() };
 })();
 
 function endIntro(fast) {
-  if (introState.leaving) return; introState.leaving = true; sstore('sk-intro', '1');
-  var finish = function () { intro.classList.add('leaving'); setTimeout(function () { intro.hidden = true; introState.running = false; root.style.overflow = ''; refreshScenes(); placeTicks(); onScroll(); shootArrows(); if (!curPage) $('heroName').focus({ preventScroll: true }); }, fast ? 300 : 800); };
+  if (introState.leaving) return; introState.leaving = true;
+  var finish = function () { intro.classList.add('leaving'); setTimeout(function () { intro.hidden = true; introState.running = false; root.style.overflow = ''; refreshScenes(); placeTicks(); onScroll(); shootArrows(); if (!pendingHash) window.scrollTo(0, 0); goPending(); if (!curPage) $('heroName').focus({ preventScroll: true }); }, fast ? 300 : 800); };
   if (fast || !motion) { finish(); return; }
   $('sigil').classList.add('lit'); introState.burst(); setTimeout(finish, 1500);
 }
@@ -2138,16 +2186,39 @@ intro.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key 
 $('replayBtn').addEventListener('click', function () { window.scrollTo(0, 0); startIntro(); });
 
 /* boot */
+/* the site always opens on the intro: a first visit, a refresh, or a return.
+   A link from outside to a project or section (#oasis, #projects) still lands there, after the intro. */
 pickTool(0);
-var h = (location.hash || '').slice(1);
-if (PBY[h]) { intro.hidden = true; introState.running = false; openPage(h); }
-else if (h && $(h)) { intro.hidden = true; introState.running = false; }
-else if (sstore('sk-intro') === '1') { intro.hidden = true; introState.running = false; }
-else { root.style.overflow = 'hidden'; $('enterBtn').focus({ preventScroll: true }); }
+try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+if (hasGsap && ScrollTrigger.clearScrollMemory) ScrollTrigger.clearScrollMemory('manual');
+var h = (location.hash || '').slice(1), navType = '';
+try { var navE = performance.getEntriesByType('navigation')[0]; navType = navE ? navE.type : ''; } catch (e) {}
+var fromOutside = navType !== 'reload' && navType !== 'back_forward' && (!document.referrer || document.referrer.indexOf(location.origin) !== 0);
+var pendingHash = fromOutside && h && (PBY[h] || $(h)) ? h : null;
+if (h) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+function goPending() {
+  var t = pendingHash; pendingHash = null; if (!t) return;
+  if (PBY[t]) openPage(t); else if ($(t)) $(t).scrollIntoView({ behavior: 'auto', block: 'start' });
+}
+function reopenIntro() {
+  if (curPage) closePage();
+  window.scrollTo(0, 0); startIntro();
+}
+window.scrollTo(0, 0);
+root.style.overflow = 'hidden'; $('enterBtn').focus({ preventScroll: true });
+/* back to the site from another page (the browser's back button restores it from memory) */
+window.addEventListener('pageshow', function (e) { if (e.persisted) reopenIntro(); });
+/* a short switch to another tab keeps your place; after half an hour away, the site opens on the intro again */
+var hiddenAt = 0;
+document.addEventListener('visibilitychange', function () {
+  if (document.hidden) { hiddenAt = Date.now(); return; }
+  if (hiddenAt && Date.now() - hiddenAt > 30 * 60 * 1000 && intro.hidden) reopenIntro();
+  hiddenAt = 0;
+});
 placeTicks(); onScroll();
 if (intro.hidden) setTimeout(shootArrows, 350);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { refreshScenes(); drawTree(); placeTicks(); onScroll(); });
-window.addEventListener('load', function () { refreshScenes(); placeTicks(); });
+window.addEventListener('load', function () { if (!intro.hidden) window.scrollTo(0, 0); refreshScenes(); placeTicks(); });
 })();
 </script>
 
