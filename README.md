@@ -1,4 +1,4 @@
-<a href="https://sasipriya-kalimuthu.vercel.app"><img src="og-image.jpg" width="100%" alt="Sasipriya Kalimuthu. Data Science, Machine Learning, AI Security. Securing AI, from LLM agents to the power grid."></a>
+<a href="https://sasipriya-kalimuthu.vercel.app"><img src="og-intro.jpg" width="100%" alt="Sasipriya Kalimuthu. Data Science, Machine Learning, AI Security. Securing AI, from LLM agents to the power grid."></a>
 
 # The Trailer
 
