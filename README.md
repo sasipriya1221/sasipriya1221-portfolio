@@ -1,6 +1,6 @@
 <a href="https://sasipriya-kalimuthu.vercel.app"><img src="og-intro.jpg" width="100%" alt="Sasipriya Kalimuthu. Data Science, Machine Learning, AI Security. Securing AI, from LLM agents to the power grid."></a>
 
-# The Trailer
+# Sasipriya Kalimuthu · Portfolio
 
 The portfolio of **Sasipriya Kalimuthu**: AI security and machine learning. Seven projects, each told as the threat and the defence she built.
 
@@ -19,7 +19,3 @@ The portfolio of **Sasipriya Kalimuthu**: AI security and machine learning. Seve
 ## Run it locally
 
 Open `index.html` in a browser, or serve the folder with `python -m http.server`.
-
----
-
-Her [GitHub profile](https://github.com/sasipriya1221) is the teaser. This site is the trailer.
